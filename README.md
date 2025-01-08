@@ -11,15 +11,26 @@ bit.ly/binarybreakout
 
 ## How the AI works (The Robots)
 
-- Sentinel AI: This AI does not harm the player, it patrols a set path and has a vision FOV that when the player is spotted (overlaps with the FOV) the robot will chase the player. If the player is caught by the robot, it will prompt them to answer a puzzle correctly (they have 3 tries to get it right). Each failed puzzle increases the player’s fear level. This will alert the Hunter to the player’s location after a threshold is passed. If all attempts are answered incorrectly, the player will be killed automatically by the hunter robot. If the player passes the puzzle, then the Sentinel robot will be deactivated temporarily then return to its patrol.
+### Sentinel AI 
+
+This AI does not harm the player but instead it patrols a set path and has a vision FOV that when the player is spotted (overlaps with the FOV) the robot will chase the player. If the player is caught by the robot, it will prompt them to answer a puzzle correctly of which they will have 3 tries to get it right. Each failed puzzle increases the player’s fear level. Depending on the outcome of the attempts by the player to solve the puzzles, 1 of 3 outcomes can occur:
+1. Player solves all puzzles and robot is deactivated
+2. Player fails all attempts and the Hunter teleports to them and kills them.
+3. Player fails only a couple puzzles and the fear meter increases to a high enough level that the Hunter is alerted to their position and hunts them. Player must get far enough away from all robots to decrease the fear meter and end the hunt.
 
   ![alt text](https://github.com/xGhostEYE/Binary-Breakout---AI-Prototype/blob/main/sentinel%20robot.PNG?raw=true)
   
-- Hunter AI: This AI is only triggered when the player fear level passes a certain threshold, then it will rush very quickly to the player’s current location until they kill the player, or the player’s fear level decreases enough, then it simply returns to its charging location.
+### Hunter AI
+
+This AI is only triggered when the player's fear meter passes a certain threshold. It will then rush very quickly to the player’s current location until they kill the player. However if the player’s fear meter decreases enough that the threshhold is no longer exceeded, then it returns to its starting location.
   
   ![alt text](https://github.com/xGhostEYE/Binary-Breakout---AI-Prototype/blob/main/hunter%20robot.PNG?raw=true)
   
-- Player (not an AI but affects them): The player has two circles surrounding them. The inner circle (RED) is used for the Fear counter. The longer an AI is within this circle, the higher the fear counter increases. Once it gets too high, the Hunter robot and nearest Sentinel are alerted to the player’s position and head there. The outer circle (BLUE) is used for AI optimization, meaning that only AI that are within this circle will be active, otherwise they are deactivated and save CPU resources. This occurs off screen to not break imersion (the rectangle around the player is their view). 
+### The Player
+
+The player has two circles surrounding them, each serving a different purpose:
+- Inner circle (RED): This is used for the Fear counter. The longer an AI is within this circle, the higher the fear counter increases. Once it gets too high, the Hunter robot and the nearest Sentinel are alerted to the player’s position and will head there.
+- Outer circle (BLUE): This is used for AI optimization. Only AI within the circle will be active, otherwise they are deactivated and save CPU resources. This occurs off screen to not break immersion (the rectangle around the player is their view). 
 
   ![alt text](https://github.com/xGhostEYE/Binary-Breakout---AI-Prototype/blob/main/Player%20Rings.jpg?raw=true)
 
