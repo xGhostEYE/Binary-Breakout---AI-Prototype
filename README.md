@@ -36,24 +36,32 @@ The player has two circles surrounding them, each serving a different purpose:
 
 ## Path Finding (The Grid)
 
-- All AI use A* pathfinding logic with a dynamically generated grid. This grid merely needs to be attached to any object in the scene, and whatever 2D sprites are placed on the scene will have a grid block spawned at the same location. Sprites that are not meant to be walked on just need to toggle a variable, and the grid automatically sets the block to be un walkable. If it’s not walkable, then the AI will not be able to go on it and adjust its path calculations accordingly.
+All AI use A* pathfinding logic with a dynamically generated grid. This grid merely needs to be attached to any object in the scene, and whatever 2D sprites are placed on the scene will have a grid block spawned at the same location. Sprites that are not meant to be walked on just need to toggle a variable, and the grid automatically sets the block to be unwalkable.
 
-- AI tools built into unity were not used because I wanted to learn from scratch how to build a game AI, as I have always wanted to make one. The grid was used to help assist in teaching me how to make and use A* path finding, instead of using default X,Y coordinates in unity.
+
+|![alt text](https://github.com/xGhostEYE/BinaryBreakout-AI-Prototype/blob/main/tile%20visible.PNG?raw=true)<br>Grid tiles visible with red tiles being unwalkable|![alt text](https://github.com/xGhostEYE/BinaryBreakout-AI-Prototype/blob/main/tile%20invisible.PNG?raw=true)<br>Tiles not visible|
+|:-:|:-:|
+
+
 
 ## AI States
-- Sentinel States:
-    - Patrol: Walk from one node to the next and repeat this process
+
+### Sentinel States
+- **Patrol:** Walk from one node to the next and repeat this process. Each patrol waypoint can be placed freely in a walkable location on the grid. These waypoints are then referenced by drag and dropping them into a robot's instance waypoint array.
+  
     ![alt text](https://github.com/xGhostEYE/Binary-Breakout---AI-Prototype/blob/main/AI%20Pathing.jpg?raw=true)
-    - Alerted: Player fear has increased and the robot goes to the player location. Or the player has failed a puzzle, and the nearest robot goes to them.
-    - Chasing: Robot sees the player and is chasing after them. Hunter robot will be activated here as well, as long as the Sentinel has the player within its vision FOV.
-    
+
+- **Alerted:** Triggered when the Player's fear has exceeded the threshold or the player has failed a puzzle. Then the nearest Sentinel robot goes to their location.
+  
+- **Chasing:** Robot sees the player and chases after them. The Hunter robot will be activated here as well, as long as the Sentinel has the player within its vision FOV.
+
     ![alt text](https://github.com/xGhostEYE/Binary-Breakout---AI-Prototype/blob/main/spotted.png?raw=true)
 
-    - Deactivated: The robot has been deactivated either due to story reasons, or the player passed all puzzles given to them by the robot.
+- **Deactivated:** The robot has been deactivated either due to story reasons, or the player passed all puzzles given to them by the robot.
 
-- Hunter States:
-    - Hunting: Sentinel has been given the player location either due to the player fear being too high, or a Sentinel sees them. The Hunter will rush to the player in this state.
+### Hunter States:
+- **Hunting:** The Hunter robot has been given the player location due to the player's fear being too high, or a Sentinel robot has entered the chasing state. The Hunter will then rush to the player's location in this state.
     
     ![alt text](https://github.com/xGhostEYE/Binary-Breakout---AI-Prototype/blob/main/chasing.jpg?raw=true)
   
-    - Standby: Hunter is stationary at its charge point and does nothing. Or if it lost the player location, will return to its charging station.
+- **Standby:** Hunter robot is stationary at its charge point and does nothing. It will also enter this state if it has lost the player's location, and return to its starting position.
