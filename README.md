@@ -1,7 +1,9 @@
 
 # BinaryBreakout-AI-Prototype
 
-Binary Breakout is a Game I made with a team of students for my cmpt 406 Game Design class. I was in charge of implementing and building the AI for the Sentry and Hunter robots. The code within this repo are just the main parts of what makes the AI tick. If you would like to play our game (15min) then follow the link here to play it in the browser.
+Binary Breakout is a Game about a student who gets locked in the University library and must escape. Unbenounced to them, the helpful robots that used to aid students in tasks are now out to kill them!
+
+This game was made with a team of students for my cmpt 406 Game Design class. I was in charge of implementing and building the AI for the Sentry and Hunter robots. The code within this repo are just the main parts of what makes the AI tick. If you would like to play our game (15min) then follow the link here to play it in the browser.
 - bit.ly/binarybreakout
 
 
